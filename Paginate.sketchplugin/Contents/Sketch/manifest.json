@@ -1,0 +1,23 @@
+{
+  "author" : "Jorge Martins",
+  "commands" : [
+    {
+      "script" : "paginate.cocoascript",
+      "handler" : "onRun",
+      "shortcut" : "cmd shift ctrl alt p",
+      "name" : "Paginate",
+      "identifier" : "paginate"
+    },
+  ],
+  "menu": {
+    "isRoot": true,
+    "items": [
+      "paginate",
+    ],
+  },
+  "identifier" : "com.example.sketch.paginate",
+  "version" : "0.1",
+  "description" : "Add page numbers to artboards",
+  "authorEmail" : "n",
+  "name" : "Paginate"
+}
