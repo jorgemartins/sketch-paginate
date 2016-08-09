@@ -43,6 +43,6 @@ var onRun = function(context) {
     }
 
     [current_artboard deselectAllLayers]
-    [doc showMessage: 'Document was paginated ✌️']
+    document.showMessage('Document was paginated ✌️');
   }
 };
