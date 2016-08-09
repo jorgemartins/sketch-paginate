@@ -17,7 +17,8 @@
     "menu": {
       "isRoot": true,
       "items": [
-        "Paginate now",
+        "paginate",
       ],
-    },
+      "title": "Add pagination"
+    }
 }
