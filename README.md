@@ -3,6 +3,10 @@ Pagination plugin for sketch app.
 
 This is a work in progress plugin to add pagination to Artboards. Right now you’ll have to create a text layer with the layer name `{pagination}` in each Artboard. And each dartboard will have to be sorted by Sketch's default ordering (first Artboard in the layer list is actually the last Artboard).
 
+demo:
+
+![paginate demo](https://raw.githubusercontent.com/jorgemartins/sketch-paginate/master/paginate-demo.gif)
+
 Disclaimer: It was highly inspired by bomberstudios's [Sketch Commands > Numberize](https://github.com/bomberstudios/sketch-commands/tree/master/Sketch%20Commands.sketchplugin/Contents/Sketch/Numberize)
 
 ---

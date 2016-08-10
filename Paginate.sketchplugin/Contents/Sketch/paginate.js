@@ -1,5 +1,5 @@
 var onRun = function(context) {
-
+  var doc = context.document
   function pad_number(n){
     if ( n < 10 ) {
       return "0" + n
@@ -8,7 +8,6 @@ var onRun = function(context) {
     }
   }
 
-  var doc = context.document
   var pages = [[doc currentPage] artboards];
   var nome = "{pagination}";
   var total = [pages count];
@@ -29,20 +28,16 @@ var onRun = function(context) {
     }
 
     var all_layers = [current_artboard children]
-
     for(var j=0; j < [all_layers count]; j++){
       var layer = [all_layers objectAtIndex:j]
-
       if([layer name] == nome) {
         [layer select:true byExpandingSelection:true]
-
         [layer setStringValue:texto]
         //[layer setName:"{pagination}"]
-
       }
     }
 
     [current_artboard deselectAllLayers]
-    document.showMessage('Document was paginated ✌️');
+    doc.showMessage('Document was paginated ✌️');
   }
 };
