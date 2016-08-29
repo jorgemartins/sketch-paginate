@@ -5,6 +5,7 @@
     "description" : "Add page numbers to artboards",
     "authorEmail" : "hello@jorgemartins.me",
     "author" : "Jorge Martins",
+    "homepage": "https://github.com/jorgemartins/sketch-paginate",
     "commands" : [
     {
       "script" : "paginate.js",

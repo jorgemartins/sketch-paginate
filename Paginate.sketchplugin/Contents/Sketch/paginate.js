@@ -12,12 +12,81 @@ var onRun = function(context) {
   var nome = "{pagination}";
   var total = [pages count];
 
+function jsArray(array) {
+	var length = [array count];
+      var jsArray = [];
+
+      while (length--) {
+          jsArray.push([array objectAtIndex: length]);
+      }
+      return jsArray;
+}
+function findLayersInLayer(name, exactMatch, type, rootLayer, subLayersOnly, layersToExclude) {
+
+  //create predicate format
+  var formatRules = ['(name != NULL)'];
+  var arguments = [];
+
+  //name
+  if(name) {
+    if(exactMatch) {
+      formatRules.push('(name == %@)');
+    }
+    else {
+      formatRules.push('(name like %@)');
+    }
+    arguments.push(name);
+  }
+
+  //type
+  if(type) {
+    formatRules.push('(className == %@)');
+    arguments.push(type);
+  }
+  else {
+    formatRules.push('(className == "MSLayerGroup" OR className == "MSShapeGroup" OR className == "MSArtboardGroup" OR className == "MSTextLayer")');
+  }
+
+  //layers to exclude
+  if(layersToExclude) {
+    formatRules.push('NOT (SELF IN %@)');
+    arguments.push(layersToExclude);
+  }
+
+  //prepare format string
+  var formatString = formatRules.join(' AND ');
+
+  //create predicate
+    predicate = [NSPredicate predicateWithFormat: formatString argumentArray: arguments];
+
+    //get layers to filter
+    var layers;
+    if (subLayersOnly) {
+        layers = [[rootLayer layers] array];
+    } else {
+        layers = [rootLayer children];
+    }
+
+    //perform query
+    var queryResult = [layers filteredArrayUsingPredicate: predicate];
+
+    //return result as js array
+    return jsArray(queryResult);
+}
+function findLayerInLayer(name, exactMatch, type, rootLayer, subLayersOnly, layersToExclude) {
+    var result = findLayersInLayer(name, exactMatch, type, rootLayer, subLayersOnly, layersToExclude);
+
+    //return first layer in result
+    if (result.length) return result[0];
+}
+
+
   for(var i=0; i < total; i++){
 
     var current_artboard = [pages objectAtIndex:i];
     var current_artboardname = [current_artboard name];
     var regex = /^(\d\d)_/;
-    var texto = "Page " + (i + 1) + "/" + total;
+    var paginationText = "Page " + (i + 1) + "/" + total;
 
     //add page number to artboard
     if (regex.test(current_artboardname)) {
@@ -28,12 +97,37 @@ var onRun = function(context) {
     }
 
     var all_layers = [current_artboard children]
+
     for(var j=0; j < [all_layers count]; j++){
       var layer = [all_layers objectAtIndex:j]
+      // log(layer)
       if([layer name] == nome) {
         [layer select:true byExpandingSelection:true]
-        [layer setStringValue:texto]
+        [layer setStringValue:paginationText]
         //[layer setName:"{pagination}"]
+      }
+      if([layer className] == "MSSymbolInstance") {
+        var symbolMaster = layer.symbolMaster();
+        // var paginationLayerAncestorID = symbolMaster.ancestorIDsForLayerNamed("{pagination}");
+        var paginationLayer = findLayerInLayer('{pagination}', false, 'MSTextLayer', symbolMaster, false, false);
+
+        var paginationLayerID = paginationLayer.objectID();
+
+        var existingOverrides = layer.overrides();
+        log(existingOverrides)
+
+        if(existingOverrides) {
+            existingOverrides = layer.overrides().objectForKey(NSNumber.numberWithInt(0));
+        } else {
+            existingOverrides = NSDictionary.alloc().init();
+        }
+        var overrides = NSMutableDictionary.dictionaryWithDictionary(existingOverrides);
+
+        overrides.setValue_forKey(paginationText, paginationLayerID);
+        layer.applyOverrides(overrides)
+
+
+      log(overrides)
       }
     }
 
