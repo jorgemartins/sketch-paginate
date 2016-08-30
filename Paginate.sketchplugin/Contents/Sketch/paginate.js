@@ -106,29 +106,32 @@ function findLayerInLayer(name, exactMatch, type, rootLayer, subLayersOnly, laye
         [layer setStringValue:paginationText]
         //[layer setName:"{pagination}"]
       }
-      if([layer className] == "MSSymbolInstance") {
-        var symbolMaster = layer.symbolMaster();
-        // var paginationLayerAncestorID = symbolMaster.ancestorIDsForLayerNamed("{pagination}");
-        var paginationLayer = findLayerInLayer('{pagination}', false, 'MSTextLayer', symbolMaster, false, false);
-
-        var paginationLayerID = paginationLayer.objectID();
-
-        var existingOverrides = layer.overrides();
-        log(existingOverrides)
-
-        if(existingOverrides) {
-            existingOverrides = layer.overrides().objectForKey(NSNumber.numberWithInt(0));
-        } else {
-            existingOverrides = NSDictionary.alloc().init();
-        }
-        var overrides = NSMutableDictionary.dictionaryWithDictionary(existingOverrides);
-
-        overrides.setValue_forKey(paginationText, paginationLayerID);
-        layer.applyOverrides(overrides)
-
-
-      log(overrides)
-      }
+      // if([layer className] == "MSSymbolInstance") {
+      // if([layer isKindOfClass: [MSSymbolInstance class]]) {
+      //   log(layer)
+      //   var symbolMaster = layer.symbolMaster();
+      //   var paginationLayerAncestorID = symbolMaster.ancestorIDsForLayerNamed("{pagination}");
+      //   var paginationLayer = findLayerInLayer('{pagination}', false, 'MSTextLayer', symbolMaster, false, false);
+      //   log(paginationLayerAncestorID)
+      //   log(paginationLayer)
+      //   var paginationLayerID = paginationLayer.objectID();
+      //   log(paginationLayerID)
+      //   var existingOverrides = layer.overrides();
+      //   log(existingOverrides)
+      //
+      //   if(existingOverrides) {
+      //       existingOverrides = layer.overrides().objectForKey(NSNumber.numberWithInt(0));
+      //   } else {
+      //       existingOverrides = NSDictionary.alloc().init();
+      //   }
+      //   var overrides = NSMutableDictionary.dictionaryWithDictionary(existingOverrides);
+      //
+      //   overrides.setValue_forKey(paginationText, paginationLayerID);
+      //   layer.applyOverrides(overrides)
+      //
+      //
+      // log(overrides)
+      // }
     }
 
     [current_artboard deselectAllLayers]
