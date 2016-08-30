@@ -17,6 +17,6 @@ Disclaimer: It was highly inspired by bomberstudios's [Sketch Commands > Numberi
 
 TO-DO
 - [ ] fire a dialog window to define pagination appearance (ex: `page 1/2` or just `1/2 ` or even `page 1 of 2` etc)
-- [ ] make it work with new symbols
+- [x] make it work with new symbols
 - [ ] automatically create text layer with pagination
 - [ ] define position of that auto-created layer

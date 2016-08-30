@@ -1,7 +1,7 @@
 {
     "name" : "Paginate",
     "identifier" : "com.jorgemartins.paginate",
-    "version" : "0.2",
+    "version" : "0.3",
     "description" : "Add page numbers to artboards",
     "authorEmail" : "hello@jorgemartins.me",
     "author" : "Jorge Martins",
