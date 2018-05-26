@@ -13,12 +13,12 @@
       "shortcut" : "cmd shift ctrl alt p",
       "name" : "Paginate",
       "identifier" : "paginate"
-    },
+    }
   ],
     "menu": {
       "isRoot": true,
       "items": [
-        "paginate",
+        "paginate"
       ],
       "title": "Add pagination"
     }
